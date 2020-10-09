@@ -1,6 +1,8 @@
 package sample;
+
 import java.util.HashMap;
 import java.util.Map;
+
 public class Dictionary {
     Word [] words;
     public Dictionary() {
@@ -42,8 +44,11 @@ public class Dictionary {
         for ( int i = 0; i < wd.length/2; i++) {
             words[i].setWord_target(wd[i * 2]);
             words[i].setWord_explain(wd[2 * i + 1]);
+
         }
+
     }
+
     public int binarysearch(Word[] words, String s, int left, int right) {
         while (left <= right) {
             int mid = (left + right) / 2;
@@ -58,6 +63,7 @@ public class Dictionary {
         }
         return -1;
     }
+
     public String get(String s) {
         if (binarysearch(words, s, 0, words.length - 1) >= 0) {
             return words[binarysearch(words, s, 0, words.length - 1)].getWord_explain();
@@ -76,21 +82,17 @@ public class Dictionary {
         }
         return false;
     }
-    public String [] Suggest(String s) {
+    public Map<String, String> Suggest(String s) {
+        Map<String, String> dictionary = new HashMap<String, String>();
         int suggest_n = 0;
         for (int i = 0; i < words.length; i++) {
-            if (words[i].getWord_target().compareTo(s) > 0 && check_w(s, words[i].getWord_target())) {
+            if (words[i].getWord_target().compareTo(s) > 0 && check_w(s, words[i].getWord_target()) && suggest_n < 8 ) {
+                dictionary.put(words[i].getWord_target(), words[i].getWord_explain());
                 suggest_n++;
             }
-        }
-        String [] dictionary = new String[suggest_n];
-        suggest_n = 0;
-        for (int i = 0; i < words.length; i++) {
-            if (words[i].getWord_target().compareTo(s) > 0 && check_w(s, words[i].getWord_target())) {
-                dictionary[suggest_n] = words[i].getWord_target();
-                suggest_n++;
-            }
+
         }
         return dictionary;
     }
+
 }
