@@ -1,49 +1,54 @@
 package sample;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.*;
+import java.util.Arrays;
+
 public class Dictionary {
-    Word [] words;
-    public Dictionary() {
-        String [] wd = {"ability","Khả năng\n" ,
-                "able","thể\n" ,
-                "accept", "chấp nhận\n" ,
-                "acceptable", "chấp nhận được\n" ,
-                "accident", "Tai nạn\n" ,
-                "according", "theo\n" ,
-                "account", "tính toán\n" ,
-                "accurate", "chính xác\n" ,
-                "achieve", "đạt được\n" ,
-                "act", "hành động\n" ,
-                "action", "hành động\n" ,
-                "active", "hoạt động\n" ,
-                "activity", "Hoạt động\n" ,
-                "actor", "Diễn viên\n" ,
-                "actual", "thực tế\n" ,
-                "ad", "Quảng cáo\n" ,
-                "add", "thêm vào\n" ,
-                "addition", "Thêm vào\n" ,
-                "additional", "thêm\n" ,
-                "administration", "Quyền quản trị\n" ,
-                "administrative", "hành chính\n" ,
-                "admit", "thừa nhận\n" ,
-                "adult", "người lớn\n" ,
-                "advertising", "Quảng cáo\n" ,
-                "advice", "Lời khuyên\n" ,
-                "affair", "Việc\n" ,
-                "affect", "có ảnh hưởng đến\n" ,
-                "afford", "đủ khả năng\n" ,
-                "afraid", "sợ\n" ,
-                "after", "sau\n" ,
-                "afternoon", "buổi chiều"};
-        words = new Word[wd.length/2];
-        for ( int i = 0; i< wd.length/2; i++) {
-            words[i] = new Word();
-        }
-        for ( int i = 0; i < wd.length/2; i++) {
-            words[i].setWord_target(wd[i * 2]);
-            words[i].setWord_explain(wd[2 * i + 1]);
+    private Word [] dictionary;
+    public void show() {
+        for ( int i = 0; i< dictionary.length; i++) {
+            System.out.println(dictionary[i].getWord_target());
         }
     }
+    public Dictionary () {
+        try {
+            Word ac = new Word();
+            ac.setWord_target("a");
+            ac.setWord_explain("b");
+            dictionary = new Word[1];
+            dictionary[0] = new Word();
+            dictionary[0] = ac;
+            System.out.println(dictionary[0].getWord_target());
+            File myFile = new File("D:\\New folder\\tu_dien_data\\E_V.txt");
+            FileReader fileReader = new FileReader(myFile);
+            BufferedReader reader = new BufferedReader(fileReader);
+
+            String line = null;
+            while((line = reader.readLine()) != null) {
+                int m = 0;
+                for ( int i = 0; i< line.length(); i++) {
+                    if (line.charAt(i) == '<') {
+                        m = i;
+                        break;
+                    }
+                }
+                Word a = new Word();
+                a.setWord_target(line.substring(0, m));
+                a.setWord_explain(line.substring(m, line.length()));
+                dictionary = Arrays.copyOf(dictionary, dictionary.length + 1);
+                dictionary[dictionary.length - 1] = new Word();
+                dictionary[dictionary.length - 1] = a;
+
+            }
+            System.out.println(dictionary[1].getWord_target());
+            reader.close();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
     public int binarysearch(Word[] words, String s, int left, int right) {
         while (left <= right) {
             int mid = (left + right) / 2;
@@ -58,11 +63,12 @@ public class Dictionary {
         }
         return -1;
     }
+
     public String get(String s) {
-        if (binarysearch(words, s, 0, words.length - 1) >= 0) {
-            return words[binarysearch(words, s, 0, words.length - 1)].getWord_explain();
+        if (binarysearch(dictionary, s, 0, dictionary.length - 1) >= 0) {
+            return dictionary[binarysearch(dictionary, s, 0, dictionary.length - 1)].getWord_explain();
         } else {
-            return "a";
+            return " ";
         }
     }
     public boolean check_w(String s1, String s2) {
@@ -77,20 +83,17 @@ public class Dictionary {
         return false;
     }
     public String [] Suggest(String s) {
+        String [] suggest = new String[20];
+        for (  int i = 0; i< 20; i++) {
+            suggest[i] = " ";
+        }
         int suggest_n = 0;
-        for (int i = 0; i < words.length; i++) {
-            if (words[i].getWord_target().compareTo(s) > 0 && check_w(s, words[i].getWord_target())) {
+        for ( int i = 0; i< dictionary.length ; i++) {
+            if (check_w(s, dictionary[i].getWord_target()) && suggest_n < 20) {
+                suggest[suggest_n] = dictionary[i].getWord_target();
                 suggest_n++;
             }
         }
-        String [] dictionary = new String[suggest_n];
-        suggest_n = 0;
-        for (int i = 0; i < words.length; i++) {
-            if (words[i].getWord_target().compareTo(s) > 0 && check_w(s, words[i].getWord_target())) {
-                dictionary[suggest_n] = words[i].getWord_target();
-                suggest_n++;
-            }
-        }
-        return dictionary;
+        return suggest;
     }
 }
