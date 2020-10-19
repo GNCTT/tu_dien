@@ -9,7 +9,7 @@ public class Dictionary {
             System.out.println(dictionary[i].getWord_target());
         }
     }
-    public Dictionary () {
+    public Dictionary (String path) {
         try {
             Word ac = new Word();
             ac.setWord_target("a");
@@ -18,7 +18,7 @@ public class Dictionary {
             dictionary[0] = new Word();
             dictionary[0] = ac;
             System.out.println(dictionary[0].getWord_target());
-            File myFile = new File("D:\\New folder\\tu_dien_data\\E_V.txt");
+            File myFile = new File(path);
             FileReader fileReader = new FileReader(myFile);
             BufferedReader reader = new BufferedReader(fileReader);
 
@@ -94,6 +94,10 @@ public class Dictionary {
                 suggest_n++;
             }
         }
-        return suggest;
+        String [] l_suggest = new String[suggest_n];
+        for ( int i = 0; i< suggest_n; i++) {
+            l_suggest[i] = suggest[i];
+        }
+        return l_suggest;
     }
 }

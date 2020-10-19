@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.web.WebView?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="474.0" prefWidth="653.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <children>
+      <Pane fx:id="read" disable="true" layoutY="45.0" prefHeight="431.0" prefWidth="503.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <AnchorPane prefHeight="431.0" prefWidth="259.0">
+               <children>
+                  <TextField prefHeight="431.0" prefWidth="259.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="257.0" prefHeight="431.0" prefWidth="246.0">
+               <children>
+                  <TextArea prefHeight="431.0" prefWidth="246.0" />
+               </children>
+            </AnchorPane>
+         </children>
+      </Pane>
+      <AnchorPane prefHeight="40.0" prefWidth="653.0">
+         <children>
+            <Text layoutX="287.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+         </children>
+      </AnchorPane>
+      <Pane fx:id="translate" layoutY="43.0" prefHeight="431.0" prefWidth="503.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <AnchorPane prefHeight="431.0" prefWidth="503.0" style="-fx-background-color: #FAEBD7;">
+               <children>
+                  <ListView fx:id="lvWords" layoutY="35.0" prefHeight="396.0" prefWidth="425.0" snapToPixel="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="78.0" AnchorPane.topAnchor="35.0" />
+                  <WebView fx:id="browser" layoutY="64.0" prefHeight="367.0" prefWidth="503.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="64.0" />
+                  <TextField fx:id="tfSearchedWord" prefHeight="34.0" prefWidth="425.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="1.0" />
+                  <Button fx:id="btSearch" layoutX="425.0" layoutY="1.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="77.0" text="Search" AnchorPane.rightAnchor="0.6666666666666856" />
+                  <AnchorPane layoutY="34.0" prefHeight="34.0" prefWidth="503.0">
+                     <children>
+                        <Button fx:id="speak" layoutY="6.0" mnemonicParsing="false" onAction="#handleClick" prefHeight="34.0" prefWidth="77.0" text="Speak" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="426.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <TextArea fx:id="sword" prefHeight="40.0" prefWidth="425.0" text="GNCTT" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </Pane>
+      <Pane fx:id="add" disable="true" layoutX="148.0" layoutY="44.0" prefHeight="442.0" prefWidth="515.0">
+         <children>
+            <TextField layoutY="27.0" prefHeight="40.0" prefWidth="503.0" />
+            <TextField alignment="CENTER" layoutY="92.0" prefHeight="142.0" prefWidth="503.0" />
+            <Text layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="word" wrappingWidth="502.99999999999994">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Text>
+            <Text fontSmoothingType="LCD" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="mean" textAlignment="CENTER" wrappingWidth="502.99999999999994">
+               <font>
+                  <Font size="21.0" />
+               </font>
+               <fill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop color="BLACK" />
+                        <Stop color="WHITE" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </fill>
+            </Text>
+            <Button layoutX="3.0" layoutY="234.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="56.0" text="Button" />
+         </children>
+      </Pane>
+      <AnchorPane layoutY="41.0" prefHeight="431.0" prefWidth="149.0">
+         <children>
+            <VBox prefHeight="431.0" prefWidth="149.0">
+               <children>
+                  <Button fx:id="AV" mnemonicParsing="false" onAction="#handleClick" prefHeight="53.0" prefWidth="157.0" text="A-V" />
+                  <Button fx:id="VA" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleClick" prefHeight="53.0" prefWidth="157.0" text="V-A" />
+                  <Button fx:id="ADD" layoutX="10.0" layoutY="63.0" mnemonicParsing="false" onAction="#handleClick" prefHeight="53.0" prefWidth="157.0" text="ADD" />
+                  <Button fx:id="Read" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleClick" prefHeight="53.0" prefWidth="157.0" text="Read-Book" />
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
