@@ -100,4 +100,65 @@ public class Dictionary {
         }
         return l_suggest;
     }
+
+    public void remove(String s) {
+        int num = binarysearch(dictionary, s, 0, dictionary.length - 1);
+        if ( num != -1) {
+            try {
+                File file1 = new File("E_V.txt");
+                file1.delete();
+                if (!file1.exists()) {
+                    file1.createNewFile();
+                }
+                FileWriter fw = new FileWriter(file1);
+                for ( int i = 0; i< dictionary.length; i++) {
+                    if ( i != num ) {
+                        fw.write(dictionary[i].getWord_target() + dictionary[i].getWord_explain() + "\n");
+                    }
+                }
+                fw.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        else {
+            System.out.println("ko thay tu nay");
+        }
+    }
+
+    public void add (String s, String smean) {
+        System.out.println(binarysearch(dictionary, s, 0, dictionary.length - 1));
+        if (binarysearch(dictionary, s, 0, dictionary.length - 1) >= 0) {
+            System.out.println("co roi");
+        }
+        else {
+            int num = 0;
+            for (int i = 0; i< dictionary.length; i++) {
+                if (s.compareTo(dictionary[i].getWord_target()) < 0) {
+                    num = i - 1;
+                    break;
+                }
+            }
+            try {
+                File file1 = new File("E_V.txt");
+                file1.delete();
+                if (!file1.exists()) {
+                    file1.createNewFile();
+                }
+                FileWriter fw = new FileWriter(file1);
+                for ( int i = 0; i< num; i++) {
+                    fw.write(dictionary[i].getWord_target() + dictionary[i].getWord_explain() + "\n");
+                }
+                fw.write(s + "<html><i>zelotic</i><br/><ul><li><font color='#cc0000'><b> xem zelotic</b></font></li></ul></html>" + "\n");
+                for (int i = num ; i< dictionary.length; i++) {
+                    fw.write(dictionary[i].getWord_target() + dictionary[i].getWord_explain() + "\n");
+                }
+                fw.close();
+            }
+            catch (Exception ex) {
+                ex.printStackTrace();
+            }
+
+        }
+    }
 }

@@ -15,6 +15,7 @@ import javafx.scene.text.Text;
 import javafx.scene.web.WebView;
 
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -22,6 +23,7 @@ import java.rmi.server.ExportException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -64,17 +66,18 @@ public class Controller implements Initializable {
     private TextArea sword;
     public String path = "D:\\New folder\\tu_dien_data\\E_V.txt";
     Dictionary dic;
+    Dictionary dic1 = new Dictionary("E_V.txt");
+    Dictionary dic2 = new Dictionary("D:\\New folder\\tu_dien_data\\V_E.txt");
 
     @FXML
     public void handleClick(ActionEvent e) {
+        dic = dic1;
         if (e.getSource() == AV || e.getSource() == VA) {
             if (e.getSource() == AV) {
-                path = "D:\\New folder\\tu_dien_data\\E_V.txt";
-                dic = new Dictionary(path);
+                dic = dic1;
             }
             else if (e.getSource() == VA) {
-                path = "D:\\New folder\\tu_dien_data\\V_E.txt";
-                dic = new Dictionary(path);
+                dic = dic2;
             }
             translate.setVisible(true);
             add.setVisible(false);
@@ -134,6 +137,9 @@ public class Controller implements Initializable {
             add.setVisible(true);
             translate.setVisible(false);
             read.setVisible(false);
+            dic.remove("bye-bye");
+            dic.add("zenx", "hello");
+            dic1 = new Dictionary("E_V.txt");
         }
         else if (e.getSource() == Read) {
             read.setVisible(true);
